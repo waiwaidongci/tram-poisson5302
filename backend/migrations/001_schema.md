@@ -8,3 +8,5 @@
 - `schedules` 保存定时计划和下一到期时间。
 - `deliveries` 保存站内分发回执，每次运行最多一个回执。
 - `audit_events` 记录登录、数据入库、运行、复核和报表分发动作。
+- `experiments` 信号方案配对试验：抽签单快照、对账快照与指纹、热身时长、置换参数、当前状态与结果。`Base.metadata.create_all` 在新库自动建表。
+- `experiment_conclusions` 每次重算产生的结论版本；源数据更新时旧版本由 `active` 置为 `superseded` 并记录撤下原因与时间，不就地覆盖。

@@ -28,3 +28,14 @@ class ScheduleRequest(RunRequest):
     recipient: str = Field(min_length=1, max_length=100)
     first_at: datetime
     repeat_daily: bool = False
+
+class ExperimentRequest(Request):
+    name: str = Field(min_length=1, max_length=120)
+    draw_csv: str = Field(min_length=1, max_length=3_500_000)
+    warmup_minutes: int = Field(default=30, ge=0, le=240)
+    permutations: int = Field(default=9999, ge=99, le=99999)
+
+class ExperimentReconRequest(Request):
+    # 与 headers 中间件 4MB 全局请求体上限保持安全余量
+    recon_csv: str = Field(min_length=1, max_length=3_500_000)
+    reason: str = Field(default='manual', min_length=1, max_length=80)
